@@ -8,18 +8,6 @@ from flask import Flask, request, abort, Response, jsonify
 # Create flask app
 app = Flask(__name__)
 
-
-# df = DataFetcher("MMM")
-# dp = DataProcessor(df.get_drip_data(), df.get_stock_data())
-# dc = DRIPCalculator(dp)
-
-# # Generate report
-# dc.generate_projection(1500, 0, False, 0, 5)
-
-# # Print projected data
-# print(dc.get_projection_data())
-
-
 @app.route("/api")
 def handle_api_req():
     # Evaluate start balance
