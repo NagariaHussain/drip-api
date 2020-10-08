@@ -43,10 +43,10 @@ class DataProcessor:
 
     def get_dgr_percent(self, n_years=5):
         growths = []
-
+        n_years = min(n_years, len(self.dividends_by_year) - 2)
         current_year = datetime.now().year
 
-        for y in range(current_year - 1, current_year - 1 - n_years, -1):
+        for y in range(current_year, current_year - 1 - n_years, -1):
             # This year
             D2 = (self.avg_data[y][0] / self.avg_data[y][1]) * 4
             # Prev year
@@ -95,7 +95,7 @@ class DataProcessor:
                 bv_date = date
                 break
         
-        BV = self.stock_data["Monthly Adjusted Time Series"][bv_date]["5. adjusted close"]
+        BV = self.stock_data["Monthly Adjusted Time Series"][bv_date]["4. close"]
 
         # Save for future use
         self.BV = float(BV)

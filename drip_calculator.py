@@ -17,7 +17,7 @@ class DRIPCalculator:
         print(stock_increase)
         shares = round(start_balance / share_price, 3)
         D_initial = self.dp.get_avg_dividend_data() * 4 * shares
-        div_growth = self.dp.get_dgr_percent()
+        div_growth = self.dp.get_dgr_percent(n_years)
         D_final = D_initial
 
         for i in range(n_years):
