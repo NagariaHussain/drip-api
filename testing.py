@@ -116,4 +116,23 @@ with open('README.md', 'r') as f:
     md = markdown.markdown(f.read())
     # Write the generated HTML to file
     with open('SPEC.html', 'w') as html_f:
+        # Write heading
+        html_f.write('''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRIP API Specification</title>
+    <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+</head>
+<body>
+<div class="markdown-body">
+''')
+        # Write markdown body
         html_f.write(md)
+
+        # Write tail
+        html_f.write('''
+</div>
+</body>
+</html>''')
