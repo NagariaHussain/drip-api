@@ -106,3 +106,5 @@ from pprint import pprint
 
 pprint(res.json())
 print("ALL tests passed!")
+
+# IAM key:  AKIA4LFBMYRYE72JJ2HE

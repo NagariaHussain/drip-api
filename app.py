@@ -8,7 +8,7 @@ from flask import Flask, request, abort, Response, jsonify
 # Create flask app
 app = Flask(__name__)
 
-@app.route("/api")
+@app.route("/")
 def handle_api_req():
     # Evaluate start balance
     start_balance = request.args.get("start_balance")
