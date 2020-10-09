@@ -4,11 +4,14 @@ from drip_calculator import DRIPCalculator
 
 # Flask
 from flask import Flask, request, abort, jsonify
+# For enabling cors
+from flask_cors import CORS
 
 # Create flask app
 app = Flask(__name__)
+CORS(app)
 
-@app.route("/api")
+@app.route("/")
 def handle_api_req():
     # Evaluate start balance
     start_balance = handle_start_balance(request.args.get("start_balance")) 
