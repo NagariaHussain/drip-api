@@ -3,12 +3,12 @@ from data_processor import DataProcessor
 from drip_calculator import DRIPCalculator
 
 # Flask
-from flask import Flask, request, abort, Response, jsonify
+from flask import Flask, request, abort, jsonify
 
 # Create flask app
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/api")
 def handle_api_req():
     # Evaluate start balance
     start_balance = handle_start_balance(request.args.get("start_balance")) 

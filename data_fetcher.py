@@ -23,7 +23,7 @@ class DataFetcher:
     def get_drip_data(self):
         try: 
             return self.stock_data['Monthly Adjusted Time Series']
-        except KeyError as ke:
+        except Exception as ke:
             # The symbol does not exist
             abort(404, "Make sure the symbol exists")
 

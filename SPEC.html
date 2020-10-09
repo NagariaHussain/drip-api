@@ -1,0 +1,71 @@
+<h1>DRIP API Specification</h1>
+<h2>Input Spec</h2>
+<h3>Required Parameters</h3>
+<ol>
+<li>
+<p><code>start_balance</code>: The starting investment amount.</p>
+</li>
+<li>
+<p><code>symbol</code>: Symbol of the security</p>
+</li>
+<li>
+<p><code>n_years</code>: The number of years for which the projection (plan) is to be determined.</p>
+</li>
+</ol>
+<h3>Optional Parameters</h3>
+<ol>
+<li>
+<p><code>reinvested</code>: Must be either <code>true</code> or <code>false</code>. The default value if <code>true</code>.</p>
+</li>
+<li>
+<p><code>tax_percent</code>: A value for tax percentage to be cut from the dividend amount for each year.</p>
+</li>
+<li>
+<p><code>emp_contrib</code>: Amount of monthly contribution by the employee.</p>
+</li>
+</ol>
+<h2>Output Spec</h2>
+<p>The data is returned in JSON format. The JSON contains a list of objects containing the following fields for each year:</p>
+<ul>
+<li>
+<p><code>year</code>: A positive integer representing the year number. Starts at 1.</p>
+</li>
+<li>
+<p><code>start_balance</code>: Starting balance for this <code>year</code>.</p>
+</li>
+<li>
+<p><code>share_price</code>: Starting share price of this year.</p>
+</li>
+<li>
+<p><code>number_of_shares</code>: Number of shares bought this year.</p>
+</li>
+<li>
+<p><code>dividend</code>: Dividend amount generated this year.</p>
+</li>
+<li>
+<p><code>reinvested</code>: Amount reinvested after cutting tax, if any, from the dividend amount.</p>
+</li>
+<li>
+<p><code>growth</code>: Growth in investment based on compound annual growth rate.</p>
+</li>
+<li>
+<p><code>end_balance</code>: Ending balance for this year. Will be the starting balance for next year</p>
+</li>
+</ul>
+<h2>Examples</h2>
+<ol>
+<li>For getting the 5 year DRIP of the <strong>MMM</strong> stock with 15000$ as starting amount:</li>
+</ol>
+<p><strong>root_url/api?start_balance=15000&amp;n_years=5&amp;symbol=MMM</strong></p>
+<ol>
+<li>For getting the above data with 9.8% tax applied</li>
+</ol>
+<p><strong>root_url/api?start_balance=15000&amp;n_years=5&amp;symbol=MMM&amp;tax_percent=9.8</strong></p>
+<ol>
+<li>For getting 10 year plan for <strong>IBM</strong> with 5000$ as starting investment amount. This time we want to see the balance without reinvestment.</li>
+</ol>
+<p><strong>root_url/api?start_balance=5000&amp;n_years=10&amp;symbol=IBM&amp;reinvested=false</strong></p>
+<h2>Contact</h2>
+<p>Mohammad Hussain Nagaria</p>
+<p>Email: hussainbhaitech@gmail.com</p>
+<p>Github: NagariaHussain</p>

@@ -100,11 +100,20 @@ import requests
 
 # -----------------------------
 
-URL = "http://127.0.0.1:5000/api?n_years=3&start_balance=15000&symbol=MMM&tax_percent=9.8"
-res = requests.get(URL)
-from pprint import pprint
+# URL = "http://127.0.0.1:5000/api?n_years=5&start_balance=5000&symbol=MMM"
+# res = requests.get(URL)
+# from pprint import pprint
 
-pprint(res.json())
-print("ALL tests passed!")
+# pprint(res.json())
+# print("ALL tests passed!")
 
-# IAM key:  AKIA4LFBMYRYE72JJ2HE
+# Generating API spec
+
+import markdown
+
+with open('README.md', 'r') as f:
+    # Generate HTML from markdown
+    md = markdown.markdown(f.read())
+    # Write the generated HTML to file
+    with open('SPEC.html', 'w') as html_f:
+        html_f.write(md)
