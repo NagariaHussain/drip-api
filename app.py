@@ -11,17 +11,7 @@ app = Flask(__name__)
 @app.route("/")
 def handle_api_req():
     # Evaluate start balance
-    start_balance = request.args.get("start_balance")
-
-    if not start_balance:
-        # Start balance not provided
-        abort(404, description="start_balance must be provided")
-    else:
-        try:
-            start_balance = float(start_balance)
-        except ValueError as ve:
-            # Invalid start balance value
-            abort(404, description="invalid start_balance value")
+    start_balance = handle_start_balance(request.args.get("start_balance")) 
 
     # Access security symbol
     symbol = request.args.get("symbol")
@@ -105,6 +95,19 @@ def handle_api_req():
     # Return data as json
     return jsonify(data)
 
+
+def handle_start_balance(start_balance):
+    if not start_balance:
+        # Start balance not provided
+        abort(404, description="start_balance must be provided")
+    else:
+        try:
+            start_balance = float(start_balance)
+        except ValueError as ve:
+            # Invalid start balance value
+            abort(404, description="invalid start_balance value")
+
+    return start_balance
 
 # Return errors as JSON
 @app.errorhandler(404)
