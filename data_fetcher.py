@@ -1,6 +1,9 @@
 import requests
 import os
 
+# For throwing HTTP exceptions
+from flask import abort
+
 class DataFetcher:
     '''Fetches data from VintageAlpha API'''
     def __init__(self, symbol):
@@ -18,7 +21,11 @@ class DataFetcher:
 
     # Returns full time series
     def get_drip_data(self):
-        return self.stock_data['Monthly Adjusted Time Series']
+        try: 
+            return self.stock_data['Monthly Adjusted Time Series']
+        except KeyError as ke:
+            # The symbol does not exist
+            abort(404, "Make sure the symbol exists")
 
     # Returns full time series with meta data
     def get_stock_data(self):
