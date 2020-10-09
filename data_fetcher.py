@@ -10,13 +10,16 @@ class DataFetcher:
         # Fetch the data
         self.fetch_data()
 
-    # Fetch Drip time series data
+    # Fetch Time series data
     def fetch_data(self):
-        drip_response = requests.get(self.data_url)
-        self.stock_data = drip_response.json()
+        response = requests.get(self.data_url)
+        # Convert it from JSON
+        self.stock_data = response.json()
 
+    # Returns full time series
     def get_drip_data(self):
         return self.stock_data['Monthly Adjusted Time Series']
 
+    # Returns full time series with meta data
     def get_stock_data(self):
         return self.stock_data
