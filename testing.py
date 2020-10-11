@@ -100,12 +100,12 @@ import requests
 
 # -----------------------------
 
-# URL = "http://127.0.0.1:5000/api?n_years=5&start_balance=5000&symbol=MMM"
-# res = requests.get(URL)
-# from pprint import pprint
+URL = "http://127.0.0.1:5000?n_years=10&start_balance=5000&symbol=AAPL"
+res = requests.get(URL)
+from pprint import pprint
 
-# pprint(res.json())
-# print("ALL tests passed!")
+pprint(res.json())
+print("ALL tests passed!")
 
 # Generating API spec
 
