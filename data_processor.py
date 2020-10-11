@@ -11,17 +11,24 @@ class DataProcessor:
         self.calculate_avg_dividends_by_year()
     
     def calculate_dividends_by_year(self):
+        # For storing dividend amounts
         self.dividends_by_year = {}
+
+        # For keeping track of unique years
+        self.unique_years = set()
 
         for date in self.drip_data:
             # Get the dividend amount as float
             dividend = float(self.drip_data[date]["7. dividend amount"])
 
+            # Extract the year from date string
+            year = datetime.strptime(date, '%Y-%m-%d').year
+
+            # Add to unique years
+            self.unique_years.add(year)
+
             # If there was a dividend that month
             if dividend > 0:
-                # Extract the year from date string
-                year = datetime.strptime(date, '%Y-%m-%d').year
-
                 # Record the dividend amount in dict
                 if year in self.dividends_by_year:
                     self.dividends_by_year[year].append(dividend)
@@ -37,11 +44,20 @@ class DataProcessor:
             # Access year's dividends list
             divs = self.dividends_by_year[year]
             self.avg_data[year] = (sum(divs) / len(divs)), len(divs)
+        
+        # Handling years with no dividends
+        for year in self.avg_data:
+            if not (year in self.unique_years):
+                self.avg_data[year] = 0, 0
 
         # For testing only
-        # print("Average div data calc complete, Data: ", self.avg_data)
+        print("Average div data calc complete, Data: ", self.avg_data)
 
     def get_dgr_percent(self, n_years=5):
+        # Return 0 if no dividend given in any year
+        if (len(self.dividends_by_year) == 0):
+            return 0
+
         growths = []
         n_years = min(n_years, len(self.dividends_by_year) - 2)
         current_year = datetime.now().year
@@ -78,7 +94,6 @@ class DataProcessor:
     
     def get_BV(self, n_years=10):
         '''Returns begin value of the stock'''
-
         # Begin value date
         bv_date = None
         current_year = datetime.now().year
@@ -95,6 +110,7 @@ class DataProcessor:
                 bv_date = date
                 break
         
+        print("BV_DATE: ", bv_date)
         BV = self.stock_data["Monthly Adjusted Time Series"][bv_date]["4. close"]
 
         # Save for future use
@@ -105,12 +121,13 @@ class DataProcessor:
         # Upper bound on number of years
         # Based on historical data avialability
 
-        n_years = min(n_years, len(self.dividends_by_year) - 1)
+        n_years = min(n_years, len(self.unique_years) - 1)
 
         # Get EV and BV
         BV = self.get_BV(n_years)
         EV = self.get_EV()
         
+        print("Using {} years to calculate CAGR".format(n_years))
         print("EV: ", EV)
         print("BV: ", BV)
 
