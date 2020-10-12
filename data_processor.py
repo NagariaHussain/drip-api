@@ -46,11 +46,12 @@ class DataProcessor:
             self.avg_data[year] = (sum(divs) / len(divs)), len(divs)
         
         # Handling years with no dividends
-        for year in self.avg_data:
-            if not (year in self.unique_years):
+        for year in self.unique_years:
+            if not (year in self.avg_data):
                 self.avg_data[year] = 0, 0
 
         # For testing only
+        print("Unique years: ", self.unique_years)
         print("Average div data calc complete, Data: ", self.avg_data)
 
     def get_dgr_percent(self, n_years=5):
