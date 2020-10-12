@@ -100,7 +100,9 @@ import requests
 
 # -----------------------------
 
-URL = "http://127.0.0.1:5000?n_years=10&start_balance=5000&symbol=AMD"
+symbol = input("Symbol: ").upper()
+
+URL = f"http://127.0.0.1:5000?n_years=10&start_balance=5000&symbol={symbol}"
 res = requests.get(URL)
 from pprint import pprint
 
